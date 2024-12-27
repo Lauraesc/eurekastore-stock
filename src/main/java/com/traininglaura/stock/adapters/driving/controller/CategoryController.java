@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController //para decirle que es un controlador
-@RequestMapping("/products") //para la ruta
+@RequestMapping("/categories") //para la ruta
 @RequiredArgsConstructor
 public class CategoryController {
 
