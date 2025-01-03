@@ -19,4 +19,11 @@ import lombok.RequiredArgsConstructor;
 
         return categoryMapper.toCategory(categoryEntity);
     }
-}
+
+        @Override
+        public Category getCategoryByName(String name) {
+            CategoryEntity categoryEntity = categoryRepository.findByName(name);
+
+            return categoryMapper.toCategory(categoryEntity);
+        }
+    }

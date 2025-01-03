@@ -15,13 +15,30 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public Category createCategory(Category category) {
+        validateCategory(category);
+
+        return categoryPersistencePort.createCategory(category);
+    }
+
+    @Override
+    public Category getCategoryByName(String name) {
+        Category category = categoryPersistencePort.getCategoryByName(name);
+        if (category == null) {
+            throw new CategoryNullException("La categoría no existe");
+        }
+        return category;
+    }
+
+    private void validateCategory(Category category) {
         if (category == null) {
             throw new CategoryNullException("La categoría no puede ser nula");
         }
         if (category.getName().isEmpty()) {
             throw new NameEmptyException("El nombre de la categoría no puede ser nulo o vacío");
         }
-
-        return categoryPersistencePort.createCategory(category);
+        if(categoryPersistencePort.getCategoryByName(category.getName()) != null){
+            throw new NameEmptyException("El nombre de la categoría ya existe");
+        }
     }
+
 }
